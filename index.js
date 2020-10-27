@@ -25,14 +25,14 @@ app.post('/sendmessage', (req, res) => {
   var mailOptions = {
     from: data.email,
     to: process.env.RECEIVER_EMAIL,
-    subject: `${data.name} - MESSAGE SEND FROM DEVENSWIERGIEL.COM`,
+    subject: `${data.email} - MESSAGE SENT FROM DEVENSWIERGIEL.COM`,
     html: `<p>From: ${data.name}</p> <p>Email: ${data.email}</p> <p>Message: ${data.message}</p>`,
   };
   smtpTransport.sendMail(mailOptions, (error, response) => {
     if (error) {
       res.send(error);
     } else {
-      res.send('Success');
+      res.send('Message Sent Successfully!');
     }
     smtpTransport.close();
   });
