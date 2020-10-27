@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.get('/', (req, res) => {
-  res.send('Personal website api');
+  res.send('Personal website api test');
 });
 app.post('/sendmessage', (req, res) => {
   var data = req.body;
