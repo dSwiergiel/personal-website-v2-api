@@ -25,7 +25,7 @@ app.post('/sendmessage', (req, res) => {
   var mailOptions = {
     from: data.email,
     to: process.env.RECEIVER_EMAIL,
-    subject: `${data.name} - message from devenswiergiel.com`,
+    subject: `${data.name} - MESSAGE SEND FROM DEVENSWIERGIEL.COM`,
     html: `<p>From: ${data.name}</p> <p>Email: ${data.email}</p> <p>Message: ${data.message}</p>`,
   };
   smtpTransport.sendMail(mailOptions, (error, response) => {
