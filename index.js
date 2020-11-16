@@ -10,24 +10,31 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
+// test endpoint
 app.get('/', (req, res) => {
   res.send('Personal website api test');
 });
+
+// send email service endpoint
 app.post('/sendmessage', (req, res) => {
   var data = req.body;
-  console.log('env sender email', process.env.SENDER_EMAIL);
-  console.log('payload', data);
+
+  // configure simple mail transport protocol
   var smtpTransport = nodemailer.createTransport({
     service: 'Gmail',
     port: 465,
     auth: { user: process.env.SENDER_EMAIL, pass: process.env.SENDER_PASSWORD },
   });
+
+  // configure email
   var mailOptions = {
     from: data.email,
     to: process.env.RECEIVER_EMAIL,
     subject: `${data.email} - MESSAGE SENT FROM DEVENSWIERGIEL.COM`,
     html: `<p>From: ${data.name}</p> <p>Email: ${data.email}</p> <p>Message: ${data.message}</p>`,
   };
+
+  // send email
   smtpTransport.sendMail(mailOptions, (error, response) => {
     if (error) {
       res.send(error);
